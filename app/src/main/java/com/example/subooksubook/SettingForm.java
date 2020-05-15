@@ -24,6 +24,11 @@ public class SettingForm extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         viewGroup = (ViewGroup) inflater.inflate(R.layout.setting_main, container, false);
+
+
+
+
+
         return viewGroup;
     }
 }
