@@ -3,10 +3,24 @@ package com.example.subooksubook;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -58,4 +72,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    // 책추가 버튼 클릭시
+    public void onClickHandler(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("책 추가 방법을 선택하세요.");    // main title
+        // array string_add_newBook은 string에 존재
+        builder.setItems(R.array.string_add_newBook, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String[] items = getResources().getStringArray(R.array.string_add_newBook);
+                // which -> 0~2
+                if (which == 1) {
+                    Intent intent = new Intent(getApplicationContext(), SearchName.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }
