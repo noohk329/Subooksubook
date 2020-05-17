@@ -83,7 +83,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String[] items = getResources().getStringArray(R.array.string_add_newBook);
                 // which -> 0~2
-                if (which == 1) {
+                if (which == 0){
+                    Intent intent = new Intent(getApplicationContext(), SearchCode.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_LONG).show();
+                }
+                else if (which == 1) {
                     Intent intent = new Intent(getApplicationContext(), SearchName.class);
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), items[which], Toast.LENGTH_LONG).show();

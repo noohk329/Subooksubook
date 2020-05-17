@@ -6,7 +6,7 @@
     <string name="setting_name">설정</string>
 
     <string-array name="string_add_newBook">
-        <item>"ISSN 검색하기"</item>
+        <item>"바코드로 검색하기"</item>
         <item>"책 제목으로 검색하기"</item>
         <item>"직접 입력하기"</item>
     </string-array>
