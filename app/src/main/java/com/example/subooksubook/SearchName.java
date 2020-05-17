@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,7 +30,7 @@ public class SearchName extends AppCompatActivity {
 
     StringBuilder searchResult;
     BufferedReader br;
-    String[] title, author, publisher, description;
+    String[] title, author, publisher, description, img_url;
     Bitmap[] imagebook;
     ResearchViewAdaptor mMyAdapter;
 
@@ -51,7 +50,6 @@ public class SearchName extends AppCompatActivity {
                 searchNaverAPI(keyword);
             }
         });
-
         mListView=(ListView)findViewById(R.id.resultlist);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -82,7 +80,7 @@ public class SearchName extends AppCompatActivity {
                 try {
                     String text = URLEncoder.encode(keyword, "UTF-8");
                     Log.d(TAG, "keyword : " + text);
-                    String apiURL = "https://openapi.naver.com/v1/search/book?query=" + text + "&display=" + display + "&"; // json 결과
+                    String apiURL = "https://openapi.naver.com/v1/search/book.json?query=" + text + "&display=" + display + "&"; // json 결과
 
                     URL url = new URL(apiURL);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -92,7 +90,6 @@ public class SearchName extends AppCompatActivity {
                     con.connect();
 
                     int responseCode = con.getResponseCode();
-
 
                     if(responseCode==200) { // 정상 호출
                         br = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -117,17 +114,18 @@ public class SearchName extends AppCompatActivity {
                     author = new String[display];
                     description = new String[display];
                     publisher = new String[display];
+                    img_url = new String[display];
                     imagebook = new Bitmap[display];
 
                     itemCount = 0;
                     for (int i = 0; i < array.length; i++) {
 //                        Log.d(TAG, "array: " + array[i]);
                         if (array[i].equals("title"))
-                            title[itemCount] = array[i + 2];
+                            title[itemCount] = removeTag(array[i + 2]);
                         if (array[i].equals("author"))
                             author[itemCount] = array[i + 2];
                         if (array[i].equals("description")) {
-                            description[itemCount] = array[i + 2];
+                            description[itemCount] = removeTag(array[i + 2]);
                             itemCount++;
                         }
                         if (array[i].equals("publisher"))
@@ -156,12 +154,9 @@ public class SearchName extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.d(TAG, "error : " + e);
                 }
-
             }
         }.start();
-
     }
-
     public void listViewDataAdd() {
         mMyAdapter = new ResearchViewAdaptor();
         for (int i = 0; i < itemCount; i++) {
@@ -174,7 +169,10 @@ public class SearchName extends AppCompatActivity {
 
         // set adapter on listView
         mListView.setAdapter(mMyAdapter);
+    }
 
+    public String removeTag(String html) throws Exception {
+        return html.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
     }
 }
 
