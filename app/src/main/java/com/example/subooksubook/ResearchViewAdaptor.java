@@ -58,7 +58,7 @@ public class ResearchViewAdaptor extends BaseAdapter{
         book_title.setText(researchViewItem.getTitle());
         book_author.setText(researchViewItem.getAuthor());
         book_publisher.setText(researchViewItem.getPublisher());
-        book_description.setText(researchViewItem.getDescription());
+//        book_description.setText(researchViewItem.getDescription());
         book_image.setImageBitmap(researchViewItem.getBookImage());
 
         return convertView;
