@@ -40,7 +40,7 @@ dependencies {
 
     // compile 'com.google.firebase:firebase-database:15.0.1'
 
-    // Zxing adapter revised by min
+    // Zxing adapter revised by minseon
     compile 'com.google.zxing:core:3.2.0'
     compile 'com.journeyapps:zxing-android-embedded:3.0.0@aar'
 }
