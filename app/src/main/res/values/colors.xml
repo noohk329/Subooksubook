@@ -3,4 +3,18 @@
     <color name="colorPrimary">#4284B3</color>
     <color name="colorPrimaryDark">#727C8E</color>
     <color name="colorAccent">#48A59D</color>
+
+    <color name="bg_login">#26ae90</color>
+    <color name="bg_register">#26ae90</color>
+    <color name="bg_main">#428bca</color>
+    <color name="white">#ffffff</color>
+    <color name="input_login">#222222</color>
+    <color name="input_login_hint">#999999</color>
+    <color name="input_register">#222222</color>
+    <color name="input_register_bg">#ffffff</color>
+    <color name="input_register_hint">#999999</color>
+    <color name="btn_login">#26ae90</color>
+    <color name="btn_login_bg">#eceef1</color>
+    <color name="lbl_name">#333333</color>
+    <color name="btn_logut_bg">#ff6861</color>
 </resources>

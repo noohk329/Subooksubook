@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Base64;
 import android.util.Log;
@@ -80,15 +81,15 @@ public class MyBookShelf extends Fragment {
                         // System.out.println(saveDate);
                         BookViewItem singleItem = postSnapshot.getValue(BookViewItem.class);
 
-                        singleItem.setTitle(postSnapshot.child("title").getValue(String.class));
                         singleItem.setAuthor(postSnapshot.child("author").getValue(String.class));
                         singleItem.setPublisher(postSnapshot.child("publisher").getValue(String.class));
                         String img_notbmp = postSnapshot.child("image").getValue(String.class);
                         singleItem.setBookImage(StringToBitmap(img_notbmp));
+                        singleItem.setTitle(postSnapshot.child("title").getValue(String.class));
 
                         /* 데이터그릇 bookItemList에 담음 */
-                        bookList.add(singleItem);
                         adapter.addItem(singleItem.getTitle(), singleItem.getAuthor(), singleItem.getPublisher(), singleItem.getBookImage());
+                        bookList.add(singleItem);
                     }
                     same = 0;
                 }
@@ -136,6 +137,9 @@ public class MyBookShelf extends Fragment {
 
         return viewGroup;
     }
+    public void refresh(){
+        adapter.notifyDataSetChanged();
+    }
     /*
      * String형을 BitMap으로 변환시켜주는 함수
      * */
@@ -149,5 +153,13 @@ public class MyBookShelf extends Fragment {
             return null;
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+    }
+
 }
+
 

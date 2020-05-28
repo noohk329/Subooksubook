@@ -22,6 +22,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class SearchName extends AppCompatActivity {
+    final String clientId = "VrRub9EgH_WUlJTdizBP";//애플리케이션 클라이언트 아이디값";
+    final String clientSecret = "Cly7aO4MIz";//애플리케이션 클라이언트 시크릿값";
+
     public static Activity searchName;
     private static final String TAG = "SearchName";
     private ListView mListView;
@@ -68,8 +71,6 @@ public class SearchName extends AppCompatActivity {
     }
 
     public void searchNaverAPI(final String keyword) {
-        final String clientId = "VrRub9EgH_WUlJTdizBP";//애플리케이션 클라이언트 아이디값";
-        final String clientSecret = "Cly7aO4MIz";//애플리케이션 클라이언트 시크릿값";
         final int display = 10; // 보여지는 검색결과의 수
 
         // 네트워크 연결은 Thread 생성 필요

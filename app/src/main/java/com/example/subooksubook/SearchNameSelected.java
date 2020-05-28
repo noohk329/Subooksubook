@@ -2,6 +2,8 @@ package com.example.subooksubook;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,6 +33,8 @@ public class SearchNameSelected extends AppCompatActivity {
 
     private DatabaseReference rootRefer = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference conditionRef = rootRefer.child("mybookshelf");
+
+    MyBookShelf mybookshelf;  // fragment 1
     int condition;
     String data_title, data_author, data_publisher;
     Bitmap imagebook;
@@ -92,6 +96,7 @@ public class SearchNameSelected extends AppCompatActivity {
                             searchName.finish();
                             finish();
                         }
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, mybookshelf).commitAllowingStateLoss();
                         finish();
                     }
 
