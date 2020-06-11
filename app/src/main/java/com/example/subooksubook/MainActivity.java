@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     MyBookShelf mybookshelf;  // fragment 1
     DiaryCal diaryCal;  //fragment 2
     StatisticForm statisticForm;    //fragment 3
-    SettingForm settingForm;    //fragment 4
+    SettingFragment settingForm;    //fragment 4
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         mybookshelf = new MyBookShelf();
         diaryCal = new DiaryCal();
         statisticForm = new StatisticForm();
-        settingForm = new SettingForm();
+        settingForm = new SettingFragment();
 
         //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, mybookshelf).commitAllowingStateLoss();
