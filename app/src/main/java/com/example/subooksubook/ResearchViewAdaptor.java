@@ -47,7 +47,7 @@ public class ResearchViewAdaptor extends BaseAdapter{
         TextView book_title = (TextView) convertView.findViewById(R.id.text_title);
         TextView book_author = (TextView) convertView.findViewById(R.id.text_author);
         TextView book_publisher = (TextView) convertView.findViewById(R.id.text_publish);
-        TextView book_description = (TextView) convertView.findViewById(R.id.text_descript);
+//        TextView book_description = (TextView) convertView.findViewById(R.id.text_descript);
         ImageView book_image = (ImageView)convertView.findViewById(R.id.book_imageView);
 
 

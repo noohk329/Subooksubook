@@ -14,6 +14,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,11 +28,11 @@ public class SearchName extends AppCompatActivity {
     final String clientId = "VrRub9EgH_WUlJTdizBP";//애플리케이션 클라이언트 아이디값";
     final String clientSecret = "Cly7aO4MIz";//애플리케이션 클라이언트 시크릿값";
 
+    private String iD_authen;
+
     public static Activity searchName;
     private static final String TAG = "SearchName";
     private ListView mListView;
-    ViewGroup viewGroup;
-    String str;
 
     StringBuilder searchResult;
     BufferedReader br;
@@ -43,6 +46,10 @@ public class SearchName extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mybookshelf_searchbyname);
+
+        Intent intent = getIntent();
+        iD_authen = intent.getStringExtra("id");
+        Log.d("SearchName", "id :"+ iD_authen);
 
         Button btn = (Button) findViewById(R.id.btn_serach);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +72,9 @@ public class SearchName extends AppCompatActivity {
                 intent.putExtra("image", mMyAdapter.getItem(position).getBookImage());
 
                 searchName = SearchName.this;
+
+                intent.putExtra("id", iD_authen);
+                Log.d("SearchName", "id :"+ iD_authen);
                 startActivity(intent);
             }
         });
@@ -91,10 +101,8 @@ public class SearchName extends AppCompatActivity {
                     con.connect();
 
                     int responseCode = con.getResponseCode();
-
                     if(responseCode==200) { // 정상 호출
                         br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
                     } else {  // 에러 발생
                         br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
                     }
@@ -103,13 +111,11 @@ public class SearchName extends AppCompatActivity {
                     String inputLine;
                     while ((inputLine = br.readLine()) != null) {
                         searchResult.append(inputLine + "\n");
-
                     }
                     br.close();
                     con.disconnect();
 
                     String data = searchResult.toString();
-
                     String[] array = data.split("\"");
                     title = new String[display];
                     author = new String[display];
@@ -127,8 +133,7 @@ public class SearchName extends AppCompatActivity {
                             author[itemCount] = array[i + 2];
                         if (array[i].equals("description")) {
                             description[itemCount] = removeTag(array[i + 2]);
-                            itemCount++;
-                        }
+                            itemCount++;  }
                         if (array[i].equals("publisher"))
                             publisher[itemCount] = array[i + 2];
                         if (array[i].equals("image")) {
@@ -142,9 +147,6 @@ public class SearchName extends AppCompatActivity {
                             imagebook[itemCount]  = BitmapFactory.decodeStream(is);
                         }
                     }
-
-//                    Log.d(TAG, "title: " + title[0] + title[1] + title[2]);
-
                     // 결과를 성공적으로 불러오면, UiThread에서 listView에 데이터를 추가
                     runOnUiThread(new Runnable() {
                         @Override
@@ -167,7 +169,6 @@ public class SearchName extends AppCompatActivity {
                     (description[i]).toString(),
                     (imagebook[i]));
         }
-
         // set adapter on listView
         mListView.setAdapter(mMyAdapter);
     }

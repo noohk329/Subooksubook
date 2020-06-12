@@ -91,4 +91,16 @@ public class BookViewAdapter extends BaseAdapter {
     {
         return bookItemList.get(position).getTitle();
     }
+    public String getAuthor(int position)
+    {
+        return bookItemList.get(position).getAuthor();
+    }
+    public String getPublisher(int position)
+    {
+        return bookItemList.get(position).getPublisher();
+    }
+    public Bitmap getBookImage(int position)
+    {
+        return bookItemList.get(position).getBookImage();
+    }
 }

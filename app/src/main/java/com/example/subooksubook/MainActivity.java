@@ -1,13 +1,11 @@
 package com.example.subooksubook;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Intent intent = getIntent();
+        String iD_authen = intent.getStringExtra("id");
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
         // create fragment
-        mybookshelf = new MyBookShelf();
+        Log.d("MainActivity", "id :"+ iD_authen);
+        mybookshelf = new MyBookShelf(iD_authen);
         diaryCal = new DiaryCal();
         statisticForm = new StatisticForm();
         settingForm = new SettingForm();
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-
                     case R.id.home: {
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, mybookshelf).commitAllowingStateLoss();
                         return true;

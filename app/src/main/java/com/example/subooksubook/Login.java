@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
@@ -86,7 +88,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         if(task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "로그인 성공!", Toast.LENGTH_LONG).show();
                             finish();
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            FirebaseUser user = firebaseAuth.getCurrentUser();
+                            //textViewUserEmail의 내용을 변경해 준다.
+                            String iD = user.getUid();
+                            Log.d("Profile", "id :"+ iD);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.putExtra("id", iD);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(getApplicationContext(), "로그인 실패!", Toast.LENGTH_LONG).show();
                             textviewMessage.setText("로그인 실패 유형\n - password가 맞지 않습니다.\n -서버에러");

@@ -3,8 +3,9 @@ package com.example.subooksubook;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +37,6 @@ public class SearchNameSelected extends AppCompatActivity {
     private DatabaseReference rootRefer = FirebaseDatabase.getInstance().getReference();
     private DatabaseReference conditionRef = rootRefer.child("mybookshelf");
 
-    MyBookShelf mybookshelf;  // fragment 1
     int condition;
     String data_title, data_author, data_publisher;
     Bitmap imagebook;
@@ -46,6 +48,9 @@ public class SearchNameSelected extends AppCompatActivity {
         setContentView(R.layout.activity_search_name_selected);
 
         Intent intent = getIntent();
+        final String iD_authen = intent.getStringExtra("id");
+        final DatabaseReference conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
+
         ImageView bookImg = (ImageView) findViewById(R.id.img_book);
         TextView title = (TextView) findViewById(R.id.text_title);
         TextView author = (TextView) findViewById(R.id.text_author);
@@ -87,19 +92,18 @@ public class SearchNameSelected extends AppCompatActivity {
 
                             conditionRef.child(getTime).child("title").setValue(data_title);
                             conditionRef.child(getTime).child("author").setValue(data_author);
-                            conditionRef.child(getTime).child("publisher").setValue(data_publisher);
                             conditionRef.child(getTime).child("imagebitmap").setValue(BitmapToString(imagebook));
+                            conditionRef.child(getTime).child("publisher").setValue(data_publisher);
                             conditionRef.child(getTime).child("Time").setValue(getTime);
                             Toast.makeText(getApplicationContext(), "나만의 책꽃이 저장완료", Toast.LENGTH_LONG).show();
-
+                            finish();
                             SearchName searchName = (SearchName) SearchName.searchName;
                             searchName.finish();
+                        }
+                        else {
                             finish();
                         }
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, mybookshelf).commitAllowingStateLoss();
-                        finish();
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
                         Log.w("SearchNameSelected", "loadPost:onCancelled", databaseError.toException());
@@ -118,5 +122,4 @@ public class SearchNameSelected extends AppCompatActivity {
         String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
         return temp;
     }
-
 }

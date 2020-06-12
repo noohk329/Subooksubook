@@ -10,7 +10,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Base64;
 import android.util.Log;
@@ -33,29 +32,40 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 
 public class MyBookShelf extends Fragment {
-
     ViewGroup viewGroup;
     ListView listView;  // 뷰 객체
     List<BookViewItem>bookList = new ArrayList<>(); // 정보 담을 객체
+    String iD_authen;
 
     public static Context context_mybookshelf; //context 변수선언
     public BookViewAdapter adapter;
 
-
     //데이터베이스
     private DatabaseReference rootRefer = FirebaseDatabase.getInstance().getReference();
-    private DatabaseReference conditionRef = rootRefer.child("mybookshelf");
-
-    public MyBookShelf() {
+    DatabaseReference conditionRef;
+    public MyBookShelf() {   }
+    public MyBookShelf(String iD_authen) {
         // Required empty public constructor
+        this.iD_authen = iD_authen;
+        Log.d("MyBookShelf", "id :"+ this.iD_authen);
+        conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (iD_authen == null){
+            Intent intent = getActivity().getIntent();
+            iD_authen=intent.getStringExtra("id");
+            Log.d("MyBookShelf", "id :"+ this.iD_authen);
+            conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
+        }
+
+//        DatabaseReference conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
+
         // Inflate the layout for this fragment
         viewGroup = (ViewGroup) inflater.inflate(R.layout.mybookshelf, container, false);
         adapter = new BookViewAdapter();
-        context_mybookshelf = getActivity();     //oncreate에서 this 할당
+        context_mybookshelf = getActivity();        // oncreate에서 this 할당
         listView = (ListView)viewGroup.findViewById(R.id.myBookList);
         listView.setAdapter(adapter);
 
@@ -66,37 +76,40 @@ public class MyBookShelf extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 부모가 User 인데 부모 그대로 가져오면 User 각각의 데이터 이니까 자식으로 가져와서 담아줌
                 int same = 0;
+
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     for(int i=0; i<adapter.getCount(); i++) {
                         Log.d("MyBookShelf", "gettitle :"+ adapter.getTitle(i));
-                        if (adapter.getTitle(i) == postSnapshot.child("title").getValue(String.class)) {
+                        if ((adapter.getTitle(i) == postSnapshot.child("title").getValue(String.class)))
+                            if(adapter.getTitle(i)==null || adapter.getPublisher(i)==null|| adapter.getAuthor(i)==null|| adapter.getBookImage(i)==null) {}
+                            else {
                             same = 1;   // 만약 DB 아이템이 이미 존재하는 아이템이라면 1로 표기
                             break;
-                        }
+                            }
                     }
                     if(same ==0)    // 리스트뷰에 찾았을때 똑같은 게 없다면 추가하자 same =0
                     {
                         String saveDate = postSnapshot.getKey();
                         Log.i("id", postSnapshot.getKey());
-                        // System.out.println(saveDate);
                         BookViewItem singleItem = postSnapshot.getValue(BookViewItem.class);
-
                         singleItem.setAuthor(postSnapshot.child("author").getValue(String.class));
                         singleItem.setPublisher(postSnapshot.child("publisher").getValue(String.class));
                         String img_notbmp = postSnapshot.child("image").getValue(String.class);
                         singleItem.setBookImage(StringToBitmap(img_notbmp));
                         singleItem.setTitle(postSnapshot.child("title").getValue(String.class));
 
+
                         /* 데이터그릇 bookItemList에 담음 */
                         adapter.addItem(singleItem.getTitle(), singleItem.getAuthor(), singleItem.getPublisher(), singleItem.getBookImage());
                         bookList.add(singleItem);
+//                        Log.d("MybookShelf ", singleItem.getAuthor());
+
                     }
                     same = 0;
                 }
                 //어뎁터한테 데이터 넣어줬다고 알려줌 (안하면 화면에 안나온다)
                 adapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w("MyBookShelf", "loadPost:onCancelled", databaseError.toException());
@@ -120,11 +133,13 @@ public class MyBookShelf extends Fragment {
                         // which -> 0~2
                         if (which == 0){
                             Intent intent = new Intent(getActivity().getApplicationContext(), SearchCode.class);
+                            intent.putExtra("id", iD_authen);
                             startActivity(intent);
                             Toast.makeText(getActivity().getApplicationContext(), items[which], Toast.LENGTH_LONG).show();
                         }
                         else if (which == 1) {
                             Intent intent = new Intent(getActivity().getApplicationContext(), SearchName.class);
+                            intent.putExtra("id", iD_authen);
                             startActivity(intent);
                             Toast.makeText(getActivity().getApplicationContext(), items[which], Toast.LENGTH_LONG).show();
                         }
@@ -137,6 +152,7 @@ public class MyBookShelf extends Fragment {
 
         return viewGroup;
     }
+
     public void refresh(){
         adapter.notifyDataSetChanged();
     }

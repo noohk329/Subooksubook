@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -22,10 +21,6 @@ public class SettingForm extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         viewGroup = (ViewGroup) inflater.inflate(R.layout.setting_main, container, false);
-
-
-
-
 
         return viewGroup;
     }

@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,15 +21,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Profile extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "ProfileActivity";
-
     //firebase auth object
     private FirebaseAuth firebaseAuth;
+    private String iD;
 
     //view objects
     private TextView textViewUserEmail;
     private Button buttonLogout, buttonnext;
     private TextView textivewDelete;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +51,15 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
 
         //유저가 있다면, null이 아니면 계속 진행
         FirebaseUser user = firebaseAuth.getCurrentUser();
-
         //textViewUserEmail의 내용을 변경해 준다.
         textViewUserEmail.setText("반갑습니다.\n"+ user.getEmail()+"으로 로그인 하였습니다.");
+        iD = user.getUid();
+        Log.d("Profile", "id :"+ iD);
 
         //logout button event
         buttonLogout.setOnClickListener(this);
         buttonnext.setOnClickListener(this);
         textivewDelete.setOnClickListener(this);
-
     }
 
     @Override
@@ -82,7 +82,8 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(Profile.this, "계정이 삭제 되었습니다.", Toast.LENGTH_LONG).show();
                                             finish();
-                                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                            Intent intent = (new Intent(getApplicationContext(), Login.class));
+                                            startActivity(intent);
                                         }
                                     });
                         }
@@ -99,7 +100,11 @@ public class Profile extends AppCompatActivity implements View.OnClickListener{
         else if (view == buttonnext)
         {
             finish();
-            startActivity(new Intent(this, MainActivity.class));
+            Intent intent = (new Intent(getApplicationContext(), MainActivity.class));
+            intent.putExtra("id", iD.toString());
+            Log.d("Profile", "id :"+ iD);
+            startActivity(intent);
         }
     }
+
 }
