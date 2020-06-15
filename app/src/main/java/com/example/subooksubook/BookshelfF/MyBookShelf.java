@@ -1,4 +1,4 @@
-package com.example.subooksubook;
+package com.example.subooksubook.BookshelfF;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,6 +20,11 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.subooksubook.BookshelfF.BookViewAdapter;
+import com.example.subooksubook.BookshelfF.BookViewItem;
+import com.example.subooksubook.BookshelfF.SearchCode;
+import com.example.subooksubook.BookshelfF.SearchName;
+import com.example.subooksubook.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,8 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.app.Activity.RESULT_OK;
 
 public class MyBookShelf extends Fragment {
     ViewGroup viewGroup;

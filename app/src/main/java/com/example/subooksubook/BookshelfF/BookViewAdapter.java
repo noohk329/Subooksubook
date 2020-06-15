@@ -1,4 +1,4 @@
-package com.example.subooksubook;
+package com.example.subooksubook.BookshelfF;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.subooksubook.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -57,8 +59,6 @@ public class BookViewAdapter extends BaseAdapter {
         book_author.setText(bookViewItem.getAuthor());
         book_publisher.setText(bookViewItem.getPublisher());
         book_image.setImageBitmap(bookViewItem.getBookImage());
-
-
         return convertView;
     }
 

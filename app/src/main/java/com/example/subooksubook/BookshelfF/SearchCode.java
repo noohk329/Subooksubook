@@ -1,4 +1,4 @@
-package com.example.subooksubook;
+package com.example.subooksubook.BookshelfF;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.subooksubook.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 

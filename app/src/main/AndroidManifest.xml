@@ -18,12 +18,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile"></activity>
-        <activity android:name=".FindPassword" />
-        <activity android:name=".Login" />
-        <activity android:name=".Signup" />
-        <activity android:name=".SearchNameSelected" />
-        <activity android:name=".SearchCode" />
+        <activity android:name=".Login.Profile"></activity>
+        <activity android:name=".Login.FindPassword" />
+        <activity android:name=".Login.Login" />
+        <activity android:name=".Login.Signup" />
+        <activity android:name=".BookshelfF.SearchNameSelected" />
+        <activity android:name=".BookshelfF.SearchCode" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchName" />
+        <activity android:name=".BookshelfF.SearchName" />
     </application>
 
 </manifest>

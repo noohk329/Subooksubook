@@ -1,4 +1,4 @@
-package com.example.subooksubook;
+package com.example.subooksubook.BookshelfF;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.example.subooksubook.R;
 
 import java.util.ArrayList;
 

@@ -1,15 +1,13 @@
-package com.example.subooksubook;
+package com.example.subooksubook.BookshelfF;
 
 import android.graphics.Bitmap;
 
-public class ResearchViewItem {
-
+public class BookViewItem {
     private String title;
     private String publisher;
     private String author;
-    private String description;
     private Bitmap bookImage;
-
+    private String date;
 
     public String getTitle() {
         return title;
@@ -43,10 +41,11 @@ public class ResearchViewItem {
         return bookImage;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDate() {
+        return date;
     }
-    public void setDescription(String description){
-        this.description = description;
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
