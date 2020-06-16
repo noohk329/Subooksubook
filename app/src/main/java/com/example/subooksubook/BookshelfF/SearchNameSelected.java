@@ -1,6 +1,7 @@
 package com.example.subooksubook.BookshelfF;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,12 +9,15 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.subooksubook.MainActivity;
 import com.example.subooksubook.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,12 +32,12 @@ import java.util.Date;
 public class SearchNameSelected extends AppCompatActivity {
 
     private DatabaseReference rootRefer = FirebaseDatabase.getInstance().getReference();
-    private DatabaseReference conditionRef = rootRefer.child("mybookshelf");
 
     int condition;
     String data_title, data_author, data_publisher;
     Bitmap imagebook;
-    BookViewAdapter adapter;
+    int totalpageinput;
+    Button addmybookshelf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +65,19 @@ public class SearchNameSelected extends AppCompatActivity {
         description.setText(intent.getStringExtra("description"));
         bookImg.setImageBitmap(imagebook);
 
+        addmybookshelf = (Button)findViewById(R.id.btn_add_bookshelf);
+        addmybookshelf.setEnabled(false);
+
+        findViewById(R.id.btn_pageinput).setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        //여기에 이벤트를 적어주세요
+                        pageDialog();
+                    }
+                }
+        );
+
         condition = 0;
-        Button addmybookshelf = (Button)findViewById(R.id.btn_add_bookshelf);
         addmybookshelf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,16 +97,25 @@ public class SearchNameSelected extends AppCompatActivity {
                             Date mDate = new Date(now);
                             SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");  //받아오고싶은 형식 설정
                             String getTime = simpleDate.format(mDate);
+                            String zero = "0";
 
                             conditionRef.child(getTime).child("title").setValue(data_title);
                             conditionRef.child(getTime).child("author").setValue(data_author);
                             conditionRef.child(getTime).child("imagebitmap").setValue(BitmapToString(imagebook));
                             conditionRef.child(getTime).child("publisher").setValue(data_publisher);
                             conditionRef.child(getTime).child("Time").setValue(getTime);
+                            conditionRef.child(getTime).child("totalpage").setValue(totalpageinput);
+                            conditionRef.child(getTime).child("progress").setValue(zero);
                             Toast.makeText(getApplicationContext(), "나만의 책꽃이 저장완료", Toast.LENGTH_LONG).show();
                             finish();
                             SearchName searchName = (SearchName) SearchName.searchName;
                             searchName.finish();
+
+                            //fragment 보내기
+                            Intent intentF = (new Intent(getApplicationContext(), MainActivity.class));
+                            intentF.putExtra("id", iD_authen);
+                            Log.d("SearchName", "id :"+ iD_authen);
+                            startActivity(intentF);
                         }
                         else {
                             finish();
@@ -114,5 +138,43 @@ public class SearchNameSelected extends AppCompatActivity {
         byte[] bytes = baos.toByteArray();
         String temp = Base64.encodeToString(bytes, Base64.DEFAULT);
         return temp;
+    }
+
+
+    public void pageDialog()
+    {
+        final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.custom_dialog, null);
+
+        final EditText editText = (EditText) dialogView.findViewById(R.id.edt_comment);
+        Button submitButton = (Button) dialogView.findViewById(R.id.buttonSubmit);
+        Button cancelButton = (Button) dialogView.findViewById(R.id.buttonCancel);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogBuilder.dismiss();
+                addmybookshelf.setEnabled(false);
+            }
+        });
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(editText.getText().toString()==null || Integer.parseInt(editText.getText().toString()) <0){
+                    Toast.makeText(getApplicationContext(), "잘못된 페이지 수 입력입니다. 다시 입력하세요", Toast.LENGTH_LONG).show();
+                    dialogBuilder.dismiss();
+                    addmybookshelf.setEnabled(false);
+                }
+                else {
+                    totalpageinput = Integer.parseInt(editText.getText().toString());
+                    dialogBuilder.dismiss();
+                    addmybookshelf.setEnabled(true);
+                }
+            }
+        });
+
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.show();
     }
 }

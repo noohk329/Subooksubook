@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login.Profile"></activity>
+        <activity android:name=".BookshelfF.ReadCard"></activity>
+        <activity android:name=".Login.Profile" />
         <activity android:name=".Login.FindPassword" />
         <activity android:name=".Login.Login" />
         <activity android:name=".Login.Signup" />

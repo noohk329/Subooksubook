@@ -8,7 +8,6 @@
     <string-array name="string_add_newBook">
         <item>"바코드로 검색하기"</item>
         <item>"책 제목으로 검색하기"</item>
-        <item>"직접 입력하기"</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -23,4 +22,9 @@
     <string name="btn_login">로그인</string>
     <string name="btn_register">회원가입</string>
     <string name="btn_logout">로그아웃</string>
+    <string name="inputpage">페이지 입력</string>
+
+    <string name="label_report">해당 책의 총 페이지를 입력하시오</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="label_submit">Submit</string>
 </resources>

@@ -8,6 +8,8 @@ public class BookViewItem {
     private String author;
     private Bitmap bookImage;
     private String date;
+    private String progressPercent;
+    private int totalpage;
 
     public String getTitle() {
         return title;
@@ -44,8 +46,10 @@ public class BookViewItem {
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getProgressPercent() {return progressPercent;}
+    public void setProgressPercent(String progressPercent) {this.progressPercent = progressPercent;}
 }

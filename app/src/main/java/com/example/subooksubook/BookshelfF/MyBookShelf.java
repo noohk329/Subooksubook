@@ -10,13 +10,18 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +29,7 @@ import com.example.subooksubook.BookshelfF.BookViewAdapter;
 import com.example.subooksubook.BookshelfF.BookViewItem;
 import com.example.subooksubook.BookshelfF.SearchCode;
 import com.example.subooksubook.BookshelfF.SearchName;
+import com.example.subooksubook.MainActivity;
 import com.example.subooksubook.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +43,8 @@ import java.util.List;
 public class MyBookShelf extends Fragment {
     ViewGroup viewGroup;
     ListView listView;  // 뷰 객체
+    private ListView mListView; // onclick
+    BookViewAdapter bAdapter;
     List<BookViewItem>bookList = new ArrayList<>(); // 정보 담을 객체
     String iD_authen;
 
@@ -63,8 +71,6 @@ public class MyBookShelf extends Fragment {
             conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
         }
 
-//        DatabaseReference conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
-
         // Inflate the layout for this fragment
         viewGroup = (ViewGroup) inflater.inflate(R.layout.mybookshelf, container, false);
         adapter = new BookViewAdapter();
@@ -84,10 +90,10 @@ public class MyBookShelf extends Fragment {
                     for(int i=0; i<adapter.getCount(); i++) {
                         Log.d("MyBookShelf", "gettitle :"+ adapter.getTitle(i));
                         if ((adapter.getTitle(i) == postSnapshot.child("title").getValue(String.class)))
-                            if(adapter.getTitle(i)==null || adapter.getPublisher(i)==null|| adapter.getAuthor(i)==null|| adapter.getBookImage(i)==null) {}
+                            if(adapter.getTitle(i)==null || adapter.getPublisher(i)==null|| adapter.getAuthor(i)==null|| adapter.getBookImage(i)==null|| adapter.getProgress(i) == null) {}
                             else {
-                            same = 1;   // 만약 DB 아이템이 이미 존재하는 아이템이라면 1로 표기
-                            break;
+                                same = 1;   // 만약 DB 아이템이 이미 존재하는 아이템이라면 1로 표기
+                                break;
                             }
                     }
                     if(same ==0)    // 리스트뷰에 찾았을때 똑같은 게 없다면 추가하자 same =0
@@ -100,13 +106,12 @@ public class MyBookShelf extends Fragment {
                         String img_notbmp = postSnapshot.child("image").getValue(String.class);
                         singleItem.setBookImage(StringToBitmap(img_notbmp));
                         singleItem.setTitle(postSnapshot.child("title").getValue(String.class));
-
+                        Log.d("MyBookShelf", "progress :"+ postSnapshot.child("progress").getValue(String.class));
+                        singleItem.setProgressPercent(postSnapshot.child("progress").getValue(String.class));
 
                         /* 데이터그릇 bookItemList에 담음 */
-                        adapter.addItem(singleItem.getTitle(), singleItem.getAuthor(), singleItem.getPublisher(), singleItem.getBookImage());
+                        adapter.addItem(singleItem.getTitle(), singleItem.getAuthor(), singleItem.getPublisher(), singleItem.getBookImage(), singleItem.getProgressPercent());
                         bookList.add(singleItem);
-//                        Log.d("MybookShelf ", singleItem.getAuthor());
-
                     }
                     same = 0;
                 }
@@ -139,12 +144,14 @@ public class MyBookShelf extends Fragment {
                             intent.putExtra("id", iD_authen);
                             startActivity(intent);
                             Toast.makeText(getActivity().getApplicationContext(), items[which], Toast.LENGTH_LONG).show();
+//                            getActivity().finish();
                         }
                         else if (which == 1) {
                             Intent intent = new Intent(getActivity().getApplicationContext(), SearchName.class);
                             intent.putExtra("id", iD_authen);
                             startActivity(intent);
                             Toast.makeText(getActivity().getApplicationContext(), items[which], Toast.LENGTH_LONG).show();
+                            getActivity().finish();
                         }
                     }
                 });
@@ -152,13 +159,21 @@ public class MyBookShelf extends Fragment {
                 alertDialog.show();
             }
         });
+        //Progress 설정
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), ReadCard.class);
+                intent.putExtra("title", adapter.getTitle(position));
 
+                intent.putExtra("id", iD_authen);
+                Log.d("MyBookshelf", "id :"+ iD_authen);
+                startActivity(intent);
+            }
+        });
         return viewGroup;
     }
 
-    public void refresh(){
-        adapter.notifyDataSetChanged();
-    }
     /*
      * String형을 BitMap으로 변환시켜주는 함수
      * */
@@ -178,7 +193,5 @@ public class MyBookShelf extends Fragment {
         super.onResume();
         adapter.notifyDataSetChanged();
     }
-
 }
-
 
