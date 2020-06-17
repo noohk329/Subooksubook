@@ -6,7 +6,7 @@ public class BookViewItem {
     private String title;
     private String publisher;
     private String author;
-    private Bitmap bookImage;
+    private String bookImage;
     private String date;
     private String progressPercent;
     private int totalpage;
@@ -35,10 +35,10 @@ public class BookViewItem {
         this.author = author;
     }
 
-    public void setBookImage(Bitmap bookImage) {
+    public void setBookImage(String bookImage) {
         this.bookImage = bookImage;
     }
-    public Bitmap getBookImage()
+    public String getBookImage()
     {
         return bookImage;
     }

@@ -9,6 +9,7 @@ public class ResearchViewItem {
     private String author;
     private String description;
     private Bitmap bookImage;
+    private String url;
 
 
     public String getTitle() {
@@ -48,5 +49,13 @@ public class ResearchViewItem {
     }
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

@@ -32,11 +32,11 @@ import java.util.Date;
 public class ReadCard extends AppCompatActivity {
 
     private DatabaseReference rootRefer = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference conditionRef;
-    String iD_authen, get_title, totalPage_DB;
-    int checkerForTotalPageInput, checkTotal, submit_check, last_page;
-    String dialog_page, getTime;
-    boolean addDatabase;
+    private DatabaseReference conditionRef;
+    private String iD_authen, get_title, totalPage_DB;
+    private int checkerForTotalPageInput, submit_check, last_page;
+    private String dialog_page, getTime;
+    private boolean addDatabase;
 
     TextView title, author, publisher, totalPage, readFinal;
 
@@ -53,7 +53,7 @@ public class ReadCard extends AppCompatActivity {
         Log.d("ReadCard", get_title);
 
         checkerForTotalPageInput =0; last_page=0;
-        submit_check=0; checkTotal=0;
+        submit_check=0;
 
         title = findViewById(R.id.tx_title);
         author = findViewById(R.id.tx_author);
@@ -78,29 +78,27 @@ public class ReadCard extends AppCompatActivity {
                         Log.d("ReadCard", author.getText().toString());
                         Log.d("ReadCard", publisher.getText().toString());
 
-                        for(DataSnapshot postSnapshot_d : postSnapshot.child("record").getChildren()){
-                            if(addDatabase == true){}
-                            else {
-                                if(postSnapshot_d.child("addTime").getValue(String.class)==null || postSnapshot_d.child("perPage").getValue(String.class)==null ||postSnapshot_d.child("perPercent").getValue(String.class)==null){}
-                                else
-                                {
-                                Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("addTime").getValue(String.class));
-                                Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("perPage").getValue(String.class));
-                                Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("perPercent").getValue(String.class));
-                                tableAllocate(postSnapshot_d.child("addTime").getValue(String.class), postSnapshot_d.child("perPage").getValue(String.class),
-                                        totalPage_DB, checkerForTotalPageInput);
+                        for(DataSnapshot postSnapshot_d : postSnapshot.child("record").getChildren()) {
+                            if (postSnapshot_d.child("addTime").getValue(String.class) == null || postSnapshot_d.child("perPage").getValue(String.class) == null
+                                    || postSnapshot_d.child("perPercent").getValue(String.class) == null) {
+                                break;
+                            } else {
+                                if (addDatabase == false) {
+                                    Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("addTime").getValue(String.class));
+                                    Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("perPage").getValue(String.class));
+                                    Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("perPercent").getValue(String.class));
+                                    tableAllocate(postSnapshot_d.child("addTime").getValue(String.class), postSnapshot_d.child("perPage").getValue(String.class),
+                                            totalPage_DB);
 
-                                if (last_page < Integer.parseInt(postSnapshot_d.child("perPage").getValue(String.class)))
-                                    last_page = Integer.parseInt(postSnapshot_d.child("perPage").getValue(String.class));
-                                Log.d("last Page : " + last_page, postSnapshot_d.child("perPage").getValue(String.class));
-                                checkerForTotalPageInput++;
+                                    if (last_page < Integer.parseInt(postSnapshot_d.child("perPage").getValue(String.class)))
+                                        last_page = Integer.parseInt(postSnapshot_d.child("perPage").getValue(String.class));
+                                    Log.d("last Page : " + last_page, postSnapshot_d.child("perPage").getValue(String.class));
                                 }
                             }
                         }
+                        break;
                     }
                 }
-                checkTotal = checkerForTotalPageInput;
-                addDatabase = false;
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -116,6 +114,7 @@ public class ReadCard extends AppCompatActivity {
                 Intent intentF = (new Intent(getApplicationContext(), MainActivity.class));
                 intentF.putExtra("id", iD_authen);
                 Log.d("ReadCard", "id :"+ iD_authen);
+                addDatabase=false;
                 startActivity(intentF);
             }
         });
@@ -200,7 +199,7 @@ public class ReadCard extends AppCompatActivity {
                                 Log.d("ReadCard_into", "checker = " + checkerForTotalPageInput);
 
                                 // Table 동적 할당 늘리기
-                                tableAllocate(getTime, dialog_page, totalPage_DB, checkerForTotalPageInput);
+                                tableAllocate(getTime, dialog_page, totalPage_DB);
                             }
                         }
                     }
@@ -211,7 +210,7 @@ public class ReadCard extends AppCompatActivity {
         });
     }
 
-    public void tableAllocate(String time, String page, String total, int count)
+    public void tableAllocate(String time, String page, String total)
     {
         TableLayout table_adding = (TableLayout) findViewById(R.id.tablelayout_page);
         TableRow row = new TableRow(ReadCard.this);
@@ -233,7 +232,7 @@ public class ReadCard extends AppCompatActivity {
         row.addView(dPage);
         row.addView(percent);
 
-        table_adding.addView(row, count);
+        table_adding.addView(row);
         Log.d("ReadCard_into", "책페이지 추가등록 동적할당 끝");
     }
 }

@@ -38,7 +38,9 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.0.0'
 
-    // compile 'com.google.firebase:firebase-database:15.0.1'
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
 
     // Zxing adapter revised by minseon
     implementation 'com.google.zxing:core:3.2.0'

@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.subooksubook.R;
@@ -23,11 +24,17 @@ public class SearchCode extends AppCompatActivity {
     private static String CLIENT_ID = "VrRub9EgH_WUlJTdizBP";
     private static String CLIENT_PASSWORD = "Cly7aO4MIz";
     String bookName, bookPrice, bookPubDate, authorName, publisherName;
+    private String iD_authen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mybookshelf_searchcode);
+
+        Intent intent = getIntent();
+        iD_authen = intent.getStringExtra("id");
+        Log.d("SearchName", "id :"+ iD_authen);
+
         /**********권한 요청************/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             /**

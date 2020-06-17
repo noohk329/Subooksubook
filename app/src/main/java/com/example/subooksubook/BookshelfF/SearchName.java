@@ -69,6 +69,7 @@ public class SearchName extends AppCompatActivity {
                 intent.putExtra("publisher", mMyAdapter.getItem(position).getPublisher());
                 intent.putExtra("description", mMyAdapter.getItem(position).getDescription());
                 intent.putExtra("image", mMyAdapter.getItem(position).getBookImage());
+                intent.putExtra("image_url", mMyAdapter.getItem(position).getUrl());
 
                 searchName = SearchName.this;
 
@@ -139,6 +140,7 @@ public class SearchName extends AppCompatActivity {
                             // imageView Link connect
                             // 웹에서 이미지를 가지고 온 후 이미지 뷰에 지정할 Bitmap 생성
                             URL imgurl = new URL(array[i + 2]);
+                            img_url[itemCount] = imgurl.toString();
                             HttpURLConnection conn = (HttpURLConnection)imgurl.openConnection();
                             conn.setDoInput(true);
 
@@ -166,7 +168,8 @@ public class SearchName extends AppCompatActivity {
                     (author[i]).toString(),
                     (publisher[i]).toString(),
                     (description[i]).toString(),
-                    (imagebook[i]));
+                    (imagebook[i]),
+                    (img_url[i]).toString());
         }
         // set adapter on listView
         mListView.setAdapter(mMyAdapter);

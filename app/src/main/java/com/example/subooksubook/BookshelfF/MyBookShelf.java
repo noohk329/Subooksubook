@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -103,8 +105,7 @@ public class MyBookShelf extends Fragment {
                         BookViewItem singleItem = postSnapshot.getValue(BookViewItem.class);
                         singleItem.setAuthor(postSnapshot.child("author").getValue(String.class));
                         singleItem.setPublisher(postSnapshot.child("publisher").getValue(String.class));
-                        String img_notbmp = postSnapshot.child("image").getValue(String.class);
-                        singleItem.setBookImage(StringToBitmap(img_notbmp));
+                        singleItem.setBookImage(postSnapshot.child("image").getValue(String.class));
                         singleItem.setTitle(postSnapshot.child("title").getValue(String.class));
                         Log.d("MyBookShelf", "progress :"+ postSnapshot.child("progress").getValue(String.class));
                         singleItem.setProgressPercent(postSnapshot.child("progress").getValue(String.class));
@@ -144,7 +145,7 @@ public class MyBookShelf extends Fragment {
                             intent.putExtra("id", iD_authen);
                             startActivity(intent);
                             Toast.makeText(getActivity().getApplicationContext(), items[which], Toast.LENGTH_LONG).show();
-//                            getActivity().finish();
+                            getActivity().finish();
                         }
                         else if (which == 1) {
                             Intent intent = new Intent(getActivity().getApplicationContext(), SearchName.class);

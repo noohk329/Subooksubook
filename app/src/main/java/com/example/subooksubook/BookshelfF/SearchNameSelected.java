@@ -3,10 +3,16 @@ package com.example.subooksubook.BookshelfF;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.subooksubook.BuildConfig;
 import com.example.subooksubook.MainActivity;
 import com.example.subooksubook.R;
 import com.google.firebase.database.DataSnapshot;
@@ -26,18 +33,26 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Objects;
 
 public class SearchNameSelected extends AppCompatActivity {
 
     private DatabaseReference rootRefer = FirebaseDatabase.getInstance().getReference();
 
-    int condition;
-    String data_title, data_author, data_publisher;
-    Bitmap imagebook;
-    int totalpageinput;
-    Button addmybookshelf;
+    private int condition;
+    private String data_title, data_author, data_publisher, img_url;
+    private Bitmap imagebook;
+    private int totalpageinput;
+    private Button addmybookshelf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,16 +63,17 @@ public class SearchNameSelected extends AppCompatActivity {
         final String iD_authen = intent.getStringExtra("id");
         final DatabaseReference conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
 
-        ImageView bookImg = (ImageView) findViewById(R.id.img_book);
+        final ImageView bookImg = (ImageView) findViewById(R.id.img_book);
         TextView title = (TextView) findViewById(R.id.text_title);
         TextView author = (TextView) findViewById(R.id.text_author);
         TextView publish = (TextView) findViewById(R.id.text_publish);
         TextView description = (TextView) findViewById(R.id.text_descript);
 
-        imagebook = (Bitmap) intent.getParcelableExtra("image");
+        imagebook = (Bitmap)intent.getParcelableExtra("image");
         data_title = intent.getStringExtra("title");
         data_author = intent.getStringExtra("author");
         data_publisher = intent.getStringExtra("publisher");
+        img_url=intent.getStringExtra("image_url");
 
         title.setText(data_title);
         author.setText(data_author);
@@ -99,9 +115,11 @@ public class SearchNameSelected extends AppCompatActivity {
                             String getTime = simpleDate.format(mDate);
                             String zero = "0";
 
+                            //이미지 다운로드
+                            String imgUrl = img_url;
                             conditionRef.child(data_title).child("title").setValue(data_title);
                             conditionRef.child(data_title).child("author").setValue(data_author);
-                            conditionRef.child(data_title).child("imagebitmap").setValue(BitmapToString(imagebook));
+                            conditionRef.child(data_title).child("image").setValue(img_url);
                             conditionRef.child(data_title).child("publisher").setValue(data_publisher);
                             conditionRef.child(data_title).child("Time").setValue(getTime);
                             conditionRef.child(data_title).child("totalpage").setValue(totalpageinput);
@@ -141,7 +159,6 @@ public class SearchNameSelected extends AppCompatActivity {
         return temp;
     }
 
-
     public void pageDialog()
     {
         final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
@@ -179,3 +196,5 @@ public class SearchNameSelected extends AppCompatActivity {
         dialogBuilder.show();
     }
 }
+
+

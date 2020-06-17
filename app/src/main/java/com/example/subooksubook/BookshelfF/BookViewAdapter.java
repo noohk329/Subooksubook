@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.subooksubook.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,7 +23,7 @@ public class BookViewAdapter extends BaseAdapter {
 
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<BookViewItem> bookItemList = new ArrayList<BookViewItem>() ;
-
+    Context context;
     // ListViewAdapter의 생성자
     public BookViewAdapter() {  }
 
@@ -35,7 +36,7 @@ public class BookViewAdapter extends BaseAdapter {
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Context context = parent.getContext();
+        context = parent.getContext();
 
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
@@ -59,7 +60,8 @@ public class BookViewAdapter extends BaseAdapter {
         book_title.setText(bookViewItem.getTitle());
         book_author.setText(bookViewItem.getAuthor());
         book_publisher.setText(bookViewItem.getPublisher());
-        book_image.setImageBitmap(bookViewItem.getBookImage());
+        startLoadingImage(bookViewItem.getBookImage(),book_image);
+        //book_image.setImageBitmap(bookViewItem.getBookImage());
         progress.setProgress(Integer.parseInt(bookViewItem.getProgressPercent()));
 
         return convertView;
@@ -78,7 +80,7 @@ public class BookViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String author, String publisher, Bitmap imagebook, String progress) {
+    public void addItem(String title, String author, String publisher, String imagebook, String progress) {
         BookViewItem mItem = new BookViewItem();
 
         mItem.setTitle(title);
@@ -90,6 +92,10 @@ public class BookViewAdapter extends BaseAdapter {
         /* 데이터그릇 mItem에 담음 */
         bookItemList.add(mItem);
 
+    }
+    private void startLoadingImage(String inputurl, ImageView imageView) {
+        String url =inputurl;
+        Glide.with(context).load(url).into(imageView);
     }
 
     public String getTitle(int position)
@@ -104,7 +110,7 @@ public class BookViewAdapter extends BaseAdapter {
     {
         return bookItemList.get(position).getPublisher();
     }
-    public Bitmap getBookImage(int position)
+    public String getBookImage(int position)
     {
         return bookItemList.get(position).getBookImage();
     }

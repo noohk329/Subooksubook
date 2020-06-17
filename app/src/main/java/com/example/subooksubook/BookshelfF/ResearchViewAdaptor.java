@@ -67,7 +67,7 @@ public class ResearchViewAdaptor extends BaseAdapter{
     }
 
     /* 네이버 검색 중, 제목, 저자, 이미지, 출판사, 설명 등을 담음 */
-    public void addItem(String title, String author, String publisher, String description, Bitmap imagebook) {
+    public void addItem(String title, String author, String publisher, String description, Bitmap imagebook, String url) {
 
         ResearchViewItem mItem = new ResearchViewItem();
 
@@ -76,6 +76,7 @@ public class ResearchViewAdaptor extends BaseAdapter{
         mItem.setPublisher(publisher);
         mItem.setBookImage(imagebook);
         mItem.setDescription(description);
+        mItem.setUrl(url);
 
         /* 데이터그릇 mItem에 담음 */
         mItems.add(mItem);
