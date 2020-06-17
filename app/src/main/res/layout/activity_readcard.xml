@@ -14,8 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="45dp">
 
+            <Button
+                android:id="@+id/btn_backspace"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="2"
+                android:background="@drawable/back_back" />
+
             <Space
-                android:layout_width="290dp"
+                android:layout_width="241dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8" />
 
@@ -41,11 +48,12 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
 
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="#FFFFFF"
             android:orientation="vertical">
 
@@ -63,7 +71,7 @@
                 android:textColor="#4E4E4E"
                 android:textColorHighlight="#FFFFFF"
                 android:textSize="28sp"
-                android:typeface="serif" />
+                android:fontFamily="@font/songmyung" />
 
             <Space
                 android:layout_width="match_parent"
@@ -72,7 +80,7 @@
             <LinearLayout
                 android:id="@+id/diaryWrap"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="598dp"
                 android:orientation="horizontal">
 
                 <Space
@@ -105,11 +113,12 @@
                                 android:background="@color/colorPrimary"
                                 android:text="제목"
                                 android:textAlignment="center"
+                                android:ellipsize="marquee"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#FFFFFF"
                                 android:textColorHighlight="#FFFFFF"
-                                android:textSize="18sp"
-                                android:typeface="serif" />
+                                android:textSize="14sp"
+                                android:fontFamily="@font/songmyung" />
 
                             <TextView
                                 android:id="@+id/tx_title"
@@ -121,7 +130,7 @@
                                 android:textColor="#4E4E4E"
                                 android:textColorHighlight="#FFFFFF"
                                 android:textSize="14sp"
-                                android:typeface="serif" />
+                                android:fontFamily="@font/songmyung" />
 
                         </TableRow>
 
@@ -142,8 +151,8 @@
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#FFFFFF"
                                 android:textColorHighlight="#FFFFFF"
-                                android:textSize="18sp"
-                                android:typeface="serif" />
+                                android:textSize="14sp"
+                                android:fontFamily="@font/songmyung" />
 
                             <TextView
                                 android:id="@+id/tx_author"
@@ -153,8 +162,8 @@
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#4E4E4E"
                                 android:textColorHighlight="#FFFFFF"
-                                android:textSize="18sp"
-                                android:typeface="serif" />
+                                android:textSize="14sp"
+                                android:fontFamily="@font/songmyung" />
                         </TableRow>
 
                         <TableRow
@@ -174,8 +183,8 @@
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#FFFFFF"
                                 android:textColorHighlight="#FFFFFF"
-                                android:textSize="18sp"
-                                android:typeface="serif" />
+                                android:textSize="14sp"
+                                android:fontFamily="@font/songmyung" />
 
                             <TextView
                                 android:id="@+id/tx_publisher"
@@ -185,8 +194,8 @@
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#4E4E4E"
                                 android:textColorHighlight="#FFFFFF"
-                                android:textSize="18sp"
-                                android:typeface="serif" />
+                                android:textSize="14sp"
+                                android:fontFamily="@font/songmyung" />
                         </TableRow>
                     </TableLayout>
 
@@ -197,7 +206,11 @@
                     <TableLayout
                         android:id="@+id/tablelayout_page"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="wrap_content" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="26dp" />
 
                     <TableRow
                         android:layout_width="match_parent"
@@ -208,14 +221,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/songmyung"/>
 
                         <TextView
                             android:id="@+id/tx_readfinal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"
+                            android:fontFamily="@font/songmyung"/>
                     </TableRow>
 
                 </LinearLayout>

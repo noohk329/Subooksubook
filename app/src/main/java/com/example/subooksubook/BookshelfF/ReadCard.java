@@ -18,6 +18,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.subooksubook.MainActivity;
 import com.example.subooksubook.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,12 +33,10 @@ public class ReadCard extends AppCompatActivity {
 
     private DatabaseReference rootRefer = FirebaseDatabase.getInstance().getReference();
     DatabaseReference conditionRef;
-    String iD_authen;
-    String get_title;
-    String totalPage_DB;
-    int checkerForTotalPageInput;
-    int submit_check;
-    String dialog_page;
+    String iD_authen, get_title, totalPage_DB;
+    int checkerForTotalPageInput, checkTotal, submit_check, last_page;
+    String dialog_page, getTime;
+    boolean addDatabase;
 
     TextView title, author, publisher, totalPage, readFinal;
 
@@ -46,14 +45,15 @@ public class ReadCard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_readcard);
 
+        addDatabase = false;
         Intent intent = getIntent();
         iD_authen = intent.getStringExtra("id");
         get_title = intent.getStringExtra("title");
         conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
         Log.d("ReadCard", get_title);
 
-        checkerForTotalPageInput =0;
-        submit_check=0;
+        checkerForTotalPageInput =0; last_page=0;
+        submit_check=0; checkTotal=0;
 
         title = findViewById(R.id.tx_title);
         author = findViewById(R.id.tx_author);
@@ -64,6 +64,7 @@ public class ReadCard extends AppCompatActivity {
         conditionRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                checkerForTotalPageInput =0;last_page=0;
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     Log.d("ReadCard_title search", postSnapshot.child("title").getValue(String.class));
                     if (postSnapshot.getKey().equals(get_title)) {
@@ -76,18 +77,49 @@ public class ReadCard extends AppCompatActivity {
                         Log.d("ReadCard", title.getText().toString());
                         Log.d("ReadCard", author.getText().toString());
                         Log.d("ReadCard", publisher.getText().toString());
+
                         for(DataSnapshot postSnapshot_d : postSnapshot.child("record").getChildren()){
-                            checkerForTotalPageInput++;
+                            if(addDatabase == true){}
+                            else {
+                                if(postSnapshot_d.child("addTime").getValue(String.class)==null || postSnapshot_d.child("perPage").getValue(String.class)==null ||postSnapshot_d.child("perPercent").getValue(String.class)==null){}
+                                else
+                                {
+                                Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("addTime").getValue(String.class));
+                                Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("perPage").getValue(String.class));
+                                Log.d("ReadCard_into : " + checkerForTotalPageInput, postSnapshot_d.child("perPercent").getValue(String.class));
+                                tableAllocate(postSnapshot_d.child("addTime").getValue(String.class), postSnapshot_d.child("perPage").getValue(String.class),
+                                        totalPage_DB, checkerForTotalPageInput);
+
+                                if (last_page < Integer.parseInt(postSnapshot_d.child("perPage").getValue(String.class)))
+                                    last_page = Integer.parseInt(postSnapshot_d.child("perPage").getValue(String.class));
+                                Log.d("last Page : " + last_page, postSnapshot_d.child("perPage").getValue(String.class));
+                                checkerForTotalPageInput++;
+                                }
+                            }
                         }
                     }
                 }
+                checkTotal = checkerForTotalPageInput;
+                addDatabase = false;
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.w("ReadCard", "loadPost:onCancelled", databaseError.toException());
             }
         });
-
+        //뒤로가기
+        Button back_space = findViewById(R.id.btn_backspace);
+        back_space.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                Intent intentF = (new Intent(getApplicationContext(), MainActivity.class));
+                intentF.putExtra("id", iD_authen);
+                Log.d("ReadCard", "id :"+ iD_authen);
+                startActivity(intentF);
+            }
+        });
+        //페이지 추가하기
         Button addpage_daily = findViewById(R.id.btn_dailypage_input);
         addpage_daily.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -110,7 +142,9 @@ public class ReadCard extends AppCompatActivity {
                 submitButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(editText.getText().toString()==null || Integer.parseInt(editText.getText().toString()) <0|| Integer.parseInt(editText.getText().toString()) > Integer.parseInt(totalPage_DB)){
+                        if(editText.getText().toString()==null || Integer.parseInt(editText.getText().toString()) <0||
+                                Integer.parseInt(editText.getText().toString()) > Integer.parseInt(totalPage_DB)
+                                || last_page> Integer.parseInt(editText.getText().toString()) || Integer.parseInt(editText.getText().toString())==last_page){
                             Toast.makeText(getApplicationContext(), "잘못된 페이지 수 입력입니다. 다시 입력하세요", Toast.LENGTH_LONG).show();
                             dialogBuilder.dismiss();
                         }
@@ -128,7 +162,7 @@ public class ReadCard extends AppCompatActivity {
                             long now = System.currentTimeMillis();
                             Date mDate = new Date(now);
                             SimpleDateFormat simpleDate = new SimpleDateFormat("yy/MM/dd");  //받아오고싶은 형식 설정
-                            final String getTime = simpleDate.format(mDate);
+                            getTime = simpleDate.format(mDate);
 
                             Date mDate_title = new Date(now);
                             SimpleDateFormat simpleDate_title = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");  //받아오고싶은 형식 설정
@@ -142,6 +176,7 @@ public class ReadCard extends AppCompatActivity {
                                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                                             if (postSnapshot.getKey().equals(get_title)) {
                                                 Log.d("ReadCard_into", "1");
+                                                addDatabase = true;
                                                 conditionRef.child(get_title).child("record").child(getTime_title).child("isdiary").setValue("0");
                                                 conditionRef.child(get_title).child("record").child(getTime_title).child("perPage").setValue(dialog_page);
                                                 conditionRef.child(get_title).child("record").child(getTime_title).child("addTime").setValue(getTime);
@@ -149,6 +184,7 @@ public class ReadCard extends AppCompatActivity {
                                                 String a = String.valueOf((int)(((Double.parseDouble(dialog_page) / Double.parseDouble(totalPage_DB)))*(int)(100)));
                                                 conditionRef.child(get_title).child("record").child(getTime_title).child("perPercent").setValue(a);
                                                 conditionRef.child(get_title).child("progress").setValue(a);
+
                                                 Log.d("ReadCard_into", "책페이지 추가등록 완료");
                                                 break;
                                             }
@@ -162,25 +198,9 @@ public class ReadCard extends AppCompatActivity {
 
                                 Log.d("ReadCard_into", "책페이지 추가등록 동적할당 시작");
                                 Log.d("ReadCard_into", "checker = " + checkerForTotalPageInput);
+
                                 // Table 동적 할당 늘리기
-                                TableLayout table_adding = (TableLayout) findViewById(R.id.tablelayout_page);
-                                TableRow row = new TableRow(ReadCard.this);
-                                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                                row.setLayoutParams(lp);
-
-                                TextView date = new TextView(ReadCard.this);
-                                TextView dPage = new TextView(ReadCard.this);
-                                TextView percent = new TextView(ReadCard.this);
-                                date.setText(getTime);
-                                dPage.setText("~ p." + dialog_page);
-                                percent.setText((int)(((Double.parseDouble(dialog_page) / Double.parseDouble(totalPage_DB)))*(int)(100)) + "%");
-
-                                row.addView(date);
-                                row.addView(dPage);
-                                row.addView(percent);
-
-                                table_adding.addView(row, 0);
-                                Log.d("ReadCard_into", "책페이지 추가등록 동적할당 끝");
+                                tableAllocate(getTime, dialog_page, totalPage_DB, checkerForTotalPageInput);
                             }
                         }
                     }
@@ -189,5 +209,31 @@ public class ReadCard extends AppCompatActivity {
                 dialogBuilder.show();
             }
         });
+    }
+
+    public void tableAllocate(String time, String page, String total, int count)
+    {
+        TableLayout table_adding = (TableLayout) findViewById(R.id.tablelayout_page);
+        TableRow row = new TableRow(ReadCard.this);
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
+        row.setLayoutParams(lp);
+
+        TextView date = new TextView(ReadCard.this);
+        TextView dPage = new TextView(ReadCard.this);
+        TextView percent = new TextView(ReadCard.this);
+        date.setText(time);
+        dPage.setText("~ p." + page + "  ");
+        percent.setText((int)(((Double.parseDouble(page) / Double.parseDouble(total)))*(int)(100)) + "%");
+
+        date.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+        dPage.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+        percent.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
+
+        row.addView(date);
+        row.addView(dPage);
+        row.addView(percent);
+
+        table_adding.addView(row, count);
+        Log.d("ReadCard_into", "책페이지 추가등록 동적할당 끝");
     }
 }

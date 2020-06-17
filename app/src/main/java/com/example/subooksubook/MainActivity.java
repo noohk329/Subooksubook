@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         mybookshelf = new MyBookShelf(iD_authen);
         diaryCal = new DiaryCal();
         statisticForm = new StatisticForm();
-        settingFragment = new SettingFragment();
+        settingFragment = new SettingFragment(iD_authen);
 
         //제일 처음 띄워줄 뷰를 세팅해줍니다. commit();까지 해줘야 합니다.
         getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, mybookshelf).commitAllowingStateLoss();
