@@ -43,6 +43,7 @@ dependencies {
     // Zxing adapter revised by minseon
     implementation 'com.google.zxing:core:3.2.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.0.0@aar'
+    implementation 'androidx.preference:preference:1.1.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

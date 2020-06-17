@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:textAlignment="center">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp">
+
+            <Space
+                android:layout_width="290dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8" />
+
+            <Button
+                android:id="@+id/btn_dailypage_input"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_weight="2"
+                android:background="@drawable/plus" />
+        </LinearLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <androidx.appcompat.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"></androidx.appcompat.widget.Toolbar>
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -23,14 +41,13 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
 
-        android:layout_height="675dp"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#FFFFFF">
+            android:background="#FFFFFF"
+            android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
@@ -55,7 +72,7 @@
             <LinearLayout
                 android:id="@+id/diaryWrap"
                 android:layout_width="match_parent"
-                android:layout_height="543dp"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Space
@@ -72,7 +89,7 @@
 
                     <TableLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
                         <TableRow
                             android:layout_width="match_parent"
@@ -83,6 +100,8 @@
                                 android:id="@+id/title_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
+                                android:layout_marginHorizontal="1dp"
+                                android:layout_marginVertical="1dp"
                                 android:background="@color/colorPrimary"
                                 android:text="제목"
                                 android:textAlignment="center"
@@ -98,7 +117,6 @@
                                 android:layout_height="match_parent"
                                 android:layout_alignParentTop="true"
                                 android:layout_marginLeft="1dp"
-                                android:text="TextView"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#4E4E4E"
                                 android:textColorHighlight="#FFFFFF"
@@ -116,6 +134,8 @@
                                 android:id="@+id/author_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="1dp"
+                                android:layout_marginVertical="1dp"
                                 android:background="@color/colorPrimary"
                                 android:text="저자"
                                 android:textAlignment="center"
@@ -130,7 +150,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="1dp"
-                                android:text="TextView"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#4E4E4E"
                                 android:textColorHighlight="#FFFFFF"
@@ -147,6 +166,8 @@
                                 android:id="@+id/publisher_label"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="1dp"
+                                android:layout_marginVertical="1dp"
                                 android:background="@color/colorPrimary"
                                 android:text="출판사"
                                 android:textAlignment="center"
@@ -161,7 +182,6 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="1dp"
-                                android:text="TextView"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                                 android:textColor="#4E4E4E"
                                 android:textColorHighlight="#FFFFFF"
@@ -170,18 +190,33 @@
                         </TableRow>
                     </TableLayout>
 
-                    <TextView
-                        android:id="@+id/showD_date"
+                    <Space
                         android:layout_width="match_parent"
-                        android:layout_height="34dp"
-                        android:background="@color/background"
-                        android:gravity="center"
-                        android:text="2020-06-15"
-                        android:textAlignment="center"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="#FDFCFC"
-                        android:textSize="18sp"
-                        android:typeface="serif" />
+                        android:layout_height="26dp" />
+
+                    <TableLayout
+                        android:id="@+id/tablelayout_page"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tx_totalpage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/tx_readfinal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="18sp" />
+                    </TableRow>
 
                 </LinearLayout>
 
@@ -195,4 +230,4 @@
     </androidx.core.widget.NestedScrollView>
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

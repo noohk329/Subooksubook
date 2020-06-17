@@ -89,7 +89,7 @@ public class MyBookShelf extends Fragment {
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
                     for(int i=0; i<adapter.getCount(); i++) {
                         Log.d("MyBookShelf", "gettitle :"+ adapter.getTitle(i));
-                        if ((adapter.getTitle(i) == postSnapshot.child("title").getValue(String.class)))
+                        if ((adapter.getTitle(i).equals(postSnapshot.child("title").getValue(String.class))))
                             if(adapter.getTitle(i)==null || adapter.getPublisher(i)==null|| adapter.getAuthor(i)==null|| adapter.getBookImage(i)==null|| adapter.getProgress(i) == null) {}
                             else {
                                 same = 1;   // 만약 DB 아이템이 이미 존재하는 아이템이라면 1로 표기

@@ -85,7 +85,7 @@ public class SearchNameSelected extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            if (postSnapshot.child("title").getValue(String.class).equals(data_title)) {
+                            if (postSnapshot.getKey().equals(data_title)) {
                                 Toast.makeText(getApplicationContext(), "이미 책꽃이에 있는 책입니다.", Toast.LENGTH_LONG).show();
                                 condition = -1;
                                 break;
@@ -99,13 +99,14 @@ public class SearchNameSelected extends AppCompatActivity {
                             String getTime = simpleDate.format(mDate);
                             String zero = "0";
 
-                            conditionRef.child(getTime).child("title").setValue(data_title);
-                            conditionRef.child(getTime).child("author").setValue(data_author);
-                            conditionRef.child(getTime).child("imagebitmap").setValue(BitmapToString(imagebook));
-                            conditionRef.child(getTime).child("publisher").setValue(data_publisher);
-                            conditionRef.child(getTime).child("Time").setValue(getTime);
-                            conditionRef.child(getTime).child("totalpage").setValue(totalpageinput);
-                            conditionRef.child(getTime).child("progress").setValue(zero);
+                            conditionRef.child(data_title).child("title").setValue(data_title);
+                            conditionRef.child(data_title).child("author").setValue(data_author);
+                            conditionRef.child(data_title).child("imagebitmap").setValue(BitmapToString(imagebook));
+                            conditionRef.child(data_title).child("publisher").setValue(data_publisher);
+                            conditionRef.child(data_title).child("Time").setValue(getTime);
+                            conditionRef.child(data_title).child("totalpage").setValue(totalpageinput);
+                            conditionRef.child(data_title).child("progress").setValue(zero);
+                            conditionRef.child(data_title).child("lastestPage").setValue(zero);
                             Toast.makeText(getApplicationContext(), "나만의 책꽃이 저장완료", Toast.LENGTH_LONG).show();
                             finish();
                             SearchName searchName = (SearchName) SearchName.searchName;

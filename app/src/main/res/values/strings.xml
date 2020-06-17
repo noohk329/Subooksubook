@@ -24,6 +24,7 @@
     <string name="btn_logout">로그아웃</string>
     <string name="inputpage">페이지 입력</string>
 
+    <string name="label_pageinput">마지막으로 읽은 책의 페이지를 입력하시오.</string>
     <string name="label_report">해당 책의 총 페이지를 입력하시오</string>
     <string name="label_cancel">Cancel</string>
     <string name="label_submit">Submit</string>
