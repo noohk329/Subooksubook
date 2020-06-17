@@ -1,14 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookshelfF.ReadCard">
+    android:textAlignment="center">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"></androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+
+        android:layout_height="675dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="23dp" />
+
+            <TextView
+                android:id="@+id/tx_readcard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="독서 카드"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#4E4E4E"
+                android:textColorHighlight="#FFFFFF"
+                android:textSize="28sp"
+                android:typeface="serif" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="26dp" />
+
+            <LinearLayout
+                android:id="@+id/diaryWrap"
+                android:layout_width="match_parent"
+                android:layout_height="543dp"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:id="@+id/diaryContainer"
+                    android:layout_width="329dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="1dp">
+
+                            <TextView
+                                android:id="@+id/title_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:background="@color/colorPrimary"
+                                android:text="제목"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                android:textColor="#FFFFFF"
+                                android:textColorHighlight="#FFFFFF"
+                                android:textSize="18sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/tx_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginLeft="1dp"
+                                android:text="TextView"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                android:textColor="#4E4E4E"
+                                android:textColorHighlight="#FFFFFF"
+                                android:textSize="14sp"
+                                android:typeface="serif" />
+
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="1dp">
+
+                            <TextView
+                                android:id="@+id/author_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorPrimary"
+                                android:text="저자"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                android:textColor="#FFFFFF"
+                                android:textColorHighlight="#FFFFFF"
+                                android:textSize="18sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/tx_author"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:text="TextView"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                android:textColor="#4E4E4E"
+                                android:textColorHighlight="#FFFFFF"
+                                android:textSize="18sp"
+                                android:typeface="serif" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="1dp">
+
+                            <TextView
+                                android:id="@+id/publisher_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/colorPrimary"
+                                android:text="출판사"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                android:textColor="#FFFFFF"
+                                android:textColorHighlight="#FFFFFF"
+                                android:textSize="18sp"
+                                android:typeface="serif" />
+
+                            <TextView
+                                android:id="@+id/tx_publisher"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="1dp"
+                                android:text="TextView"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                                android:textColor="#4E4E4E"
+                                android:textColorHighlight="#FFFFFF"
+                                android:textSize="18sp"
+                                android:typeface="serif" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <TextView
+                        android:id="@+id/showD_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="34dp"
+                        android:background="@color/background"
+                        android:gravity="center"
+                        android:text="2020-06-15"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="#FDFCFC"
+                        android:textSize="18sp"
+                        android:typeface="serif" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="28dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

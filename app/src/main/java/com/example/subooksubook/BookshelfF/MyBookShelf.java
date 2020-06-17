@@ -165,7 +165,6 @@ public class MyBookShelf extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity().getApplicationContext(), ReadCard.class);
                 intent.putExtra("title", adapter.getTitle(position));
-
                 intent.putExtra("id", iD_authen);
                 Log.d("MyBookshelf", "id :"+ iD_authen);
                 startActivity(intent);

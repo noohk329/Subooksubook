@@ -26,6 +26,7 @@
         <activity android:name=".Login.Signup" />
         <activity android:name=".BookshelfF.SearchNameSelected" />
         <activity android:name=".BookshelfF.SearchCode" />
+        <activity android:name=".BookshelfF.SearchName"></activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,11 +41,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookshelfF.SearchName"></activity>
-        <activity android:name=".BookshelfF.SearchNameSelected"></activity>
-        <activity android:name=".BookshelfF.SearchCode"></activity>
-
-        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>
