@@ -77,6 +77,7 @@ public class CalendarViewWithNotesActivity extends Fragment {
         setHasOptionsMenu(true);
 
 
+
         initializeEvent();
 
         new Handler().postDelayed(new Runnable() {
@@ -92,6 +93,9 @@ public class CalendarViewWithNotesActivity extends Fragment {
 
 
     private void initializeEvent(){
+
+        mEventList.clear();
+
         conditionRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

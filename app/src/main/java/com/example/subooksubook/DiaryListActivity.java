@@ -70,7 +70,9 @@ public class DiaryListActivity extends AppCompatActivity {
         homefloatbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(CalendarViewWithNotesActivity.makeIntent(v.getContext()));
+                Intent intent = new Intent(v.getContext(), CalendarViewWithNotesActivity.class);
+                intent.putExtra("id", iD_authen);
+                startActivity(intent);
             }
         });
     }
