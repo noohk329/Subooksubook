@@ -123,8 +123,8 @@ public class CalendarViewWithNotesActivity extends Fragment {
                         Boolean isDiary = null;
 
                         if(checkDiary.equals("0")){ // no diary
-                            isDiary = false;
-                            diaryText = "";
+                            isDiary = true;
+                            diaryText = " ";
                         }else if(checkDiary.equals("1")){
                             isDiary = true;
                             diaryText = recorddata.child("diarytext").getValue(String.class);

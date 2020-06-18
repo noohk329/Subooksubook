@@ -116,6 +116,8 @@ public class ShowDiaryDetailActivity extends AppCompatActivity {
         intent.putExtra("id", iD_authen);
         startActivity(intent);
 
+        finish();
+
     }
 
     public void saveOnclick(View v){
@@ -134,6 +136,7 @@ public class ShowDiaryDetailActivity extends AppCompatActivity {
         intent.putExtra("id", iD_authen);
         startActivity(intent);
 
+        finish();
     }
 
 
