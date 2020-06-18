@@ -13,7 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     MyBookShelf mybookshelf;  // fragment 1
-    DiaryCal diaryCal;  //fragment 2
+    CalendarViewWithNotesActivity calenderview;  //fragment 2
     StatisticForm statisticForm;    //fragment 3
     SettingFragment settingFragment;    //fragment 4
 
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         // create fragment
         Log.d("MainActivity", "id :"+ iD_authen);
         mybookshelf = new MyBookShelf(iD_authen);
-        diaryCal = new DiaryCal();
+        calenderview = new CalendarViewWithNotesActivity();
         statisticForm = new StatisticForm();
         settingFragment = new SettingFragment(iD_authen);
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     }
                     case R.id.diary: {
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, diaryCal).commitAllowingStateLoss();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_layout, calenderview).commitAllowingStateLoss();
                         return true;
                     }
                     case R.id.statistics: {

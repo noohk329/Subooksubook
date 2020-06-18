@@ -142,5 +142,3 @@ public class DiaryCal extends Fragment {
     }
 
 }
-
-// class 만들기 (diary - 날짜_key / text 저장하는,.. 또 뭐가 필요할랑가)

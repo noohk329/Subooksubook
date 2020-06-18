@@ -28,4 +28,20 @@
     <string name="label_report">해당 책의 총 페이지를 입력하시오</string>
     <string name="label_cancel">Cancel</string>
     <string name="label_submit">Submit</string>
+
+    <string name="cancel">cancel</string>
+    <string name="ok">ok</string>
+    <string name="new_event">New Event</string>
+    <string name="save">save</string>
+    <string name="title">Title</string>
+    <string name="completed">Completed</string>
+    <string name="set">set</string>
+    <string name="double_dots" translatable="false">:</string>
+    <string name="select_color_instruction">Select color of event</string>
+    <string name="event_default_title">My event</string>
+    <string name="no_diarys">책을 읽은 기록이 없습니다.</string>
+    <string name="not_available">Not Available</string>
+    <string name="delete">delete</string>
+    <string name="today">today</string>
+
 </resources>

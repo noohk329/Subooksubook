@@ -48,6 +48,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DiaryListActivity" />
+        <activity android:name=".ShowDiaryDetailActivity"/>
         // setting Alarm
         <receiver android:name=".DeviceBootReceiver"
             android:enabled="false">
@@ -57,6 +59,8 @@
         </receiver>
 
         <receiver android:name=".AlarmReceiver" />
+
+
     </application>
 
 </manifest>
