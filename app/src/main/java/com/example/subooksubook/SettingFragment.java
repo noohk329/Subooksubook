@@ -56,7 +56,6 @@ public class SettingFragment extends PreferenceFragmentCompat {
         setOnPreferenceChange(findPreference("setalarm_time"));
 //        setOnPreferenceChange(findPreference("userNameOpen"));
 //        setOnPreferenceChange(findPreference("autoUpdate_ringtone"));
-
         screan = getPreferenceScreen();
 
         if (time_label == null)  {}
@@ -77,7 +76,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
                 Toast.makeText(getActivity(), "알람 설정: " + isAlarm, Toast.LENGTH_SHORT).show();
             }
             else if (key.equals("login_onoff")){
-                islogin = pref.getBoolean("login_onoff", false);
+                islogin = pref.getBoolean("login_onoff", true);
                 Toast.makeText(getActivity(), "로그인 설정 " + islogin, Toast.LENGTH_SHORT).show();
                 setLogin(islogin);
             }
@@ -99,11 +98,12 @@ public class SettingFragment extends PreferenceFragmentCompat {
     }
     @SuppressLint("WrongConstant")
     public void setLogin(boolean set) {
-
-        Intent intent = new Intent(getActivity().getApplicationContext(), Profile.class);
-        intent.putExtra("id", iD_authen);
-        startActivity(intent);
-        getActivity().finish();
+        if(set == false) {
+            Intent intent = new Intent(getActivity().getApplicationContext(), Profile.class);
+            intent.putExtra("id", iD_authen);
+            startActivity(intent);
+            getActivity().finish();
+        }
 
     }
 }
