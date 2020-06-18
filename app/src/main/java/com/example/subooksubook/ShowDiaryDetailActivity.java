@@ -111,7 +111,6 @@ public class ShowDiaryDetailActivity extends AppCompatActivity {
 
         Toast.makeText(v.getContext(), "삭제 완료", Toast.LENGTH_LONG).show();
 
-
         Intent intent = new Intent(this, DiaryListActivity.class);
         intent.putExtra("selectdate", dateKey);
         intent.putExtra("id", iD_authen);
@@ -122,8 +121,10 @@ public class ShowDiaryDetailActivity extends AppCompatActivity {
     public void saveOnclick(View v){
         String newdiary = mDiaryView.getText().toString();
 
-
+        Log.d("chageIS", String.valueOf(conditionRef.child(mTitle).child("record").child(mID).child("isdiary")));
+        Log.d("id:::", String.valueOf(mID));
         conditionRef.child(mTitle).child("record").child(mID).child("isdiary").setValue("1");
+        Log.d("chageIS", String.valueOf(conditionRef.child(mTitle).child("record").child(mID).child("isdiary")));
         conditionRef.child(mTitle).child("record").child(mID).child("diarytext").setValue(newdiary);
 
         Toast.makeText(v.getContext(), "저장 완료", Toast.LENGTH_LONG).show();
