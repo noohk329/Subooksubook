@@ -13,6 +13,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.example.subooksubook.Login.Profile;
+
 
 public class SettingFragment extends PreferenceFragmentCompat {
     SharedPreferences pref;
@@ -75,8 +77,9 @@ public class SettingFragment extends PreferenceFragmentCompat {
                 Toast.makeText(getActivity(), "알람 설정: " + isAlarm, Toast.LENGTH_SHORT).show();
             }
             else if (key.equals("login_onoff")){
-                islogin = pref.getBoolean("login_onoff", true);
+                islogin = pref.getBoolean("login_onoff", false);
                 Toast.makeText(getActivity(), "로그인 설정 " + islogin, Toast.LENGTH_SHORT).show();
+                setLogin(islogin);
             }
             else if (key.equals("setalarm_time")){
                 Toast.makeText(getActivity(), "시간 설정 ", Toast.LENGTH_SHORT).show();
@@ -93,5 +96,14 @@ public class SettingFragment extends PreferenceFragmentCompat {
             startActivity(intent);
             getActivity().finish();
         }
+    }
+    @SuppressLint("WrongConstant")
+    public void setLogin(boolean set) {
+
+        Intent intent = new Intent(getActivity().getApplicationContext(), Profile.class);
+        intent.putExtra("id", iD_authen);
+        startActivity(intent);
+        getActivity().finish();
+
     }
 }
