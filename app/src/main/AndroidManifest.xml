@@ -37,20 +37,18 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".DiaryListActivity" />
         <activity android:name=".ShowDiaryDetailActivity"/>
-        // setting Alarm
+
         <receiver android:name=".DeviceBootReceiver"
             android:enabled="false">
             <intent-filter>
@@ -59,8 +57,6 @@
         </receiver>
 
         <receiver android:name=".AlarmReceiver" />
-
-
     </application>
 
 </manifest>
