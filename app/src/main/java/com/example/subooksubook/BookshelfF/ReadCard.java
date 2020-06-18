@@ -160,7 +160,7 @@ public class ReadCard extends AppCompatActivity {
                             //현재 시간 추가
                             long now = System.currentTimeMillis();
                             Date mDate = new Date(now);
-                            SimpleDateFormat simpleDate = new SimpleDateFormat("yy/MM/dd");  //받아오고싶은 형식 설정
+                            SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy/MM/dd");  //받아오고싶은 형식 설정
                             getTime = simpleDate.format(mDate);
 
                             Date mDate_title = new Date(now);

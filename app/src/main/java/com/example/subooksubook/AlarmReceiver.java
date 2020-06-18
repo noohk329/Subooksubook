@@ -9,14 +9,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -29,11 +25,11 @@ public class AlarmReceiver extends BroadcastReceiver {
     String channelId = "channel";
     String channelName = "channel Name";
     int importance = NotificationManager.IMPORTANCE_LOW;
+    int requestID;
 
     @SuppressLint("WrongConstant")
     @Override
     public void onReceive(Context context, Intent intent) {
-
 
         NotificationManager notiManager = (NotificationManager) context.getSystemService  (Context.NOTIFICATION_SERVICE);
 
@@ -49,7 +45,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                 Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-        int requestID = (int) System.currentTimeMillis();
+        requestID = (int) System.currentTimeMillis();
 
         PendingIntent pendingIntent
                 = PendingIntent.getActivity(context.getApplicationContext()

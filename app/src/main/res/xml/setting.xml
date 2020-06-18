@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:title="계정 설정"
         app:iconSpaceReserved="false">
-        <PreferenceScreen
+        <SwitchPreference
             android:title="로그인"
             android:key="login_onoff"
             app:iconSpaceReserved="false">
-        </PreferenceScreen>
+        </SwitchPreference>
+        <PreferenceScreen
+            android:title="내 정보"
+            android:dependency="login_onoff"
+            app:iconSpaceReserved="false"/>
 
     </PreferenceCategory>
     <PreferenceCategory
@@ -21,11 +24,12 @@
             android:defaultValue="false"
             app:iconSpaceReserved="false"/>
         <PreferenceScreen
+            android:key="setalarm_time"
             android:title="시간 설정"
-            android:summary="@string/alarmtime"
             android:dependency="setalarm"
-            app:iconSpaceReserved="false"/>
-
+            app:iconSpaceReserved="false">
+            <intent android:action="com.example.subooksubook.activities.Timepicker" />
+        </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory

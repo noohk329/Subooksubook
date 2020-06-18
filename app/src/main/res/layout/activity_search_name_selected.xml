@@ -85,29 +85,26 @@
         android:id="@+id/btn_add_bookshelf"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="52dp"
         android:layout_marginBottom="16dp"
-        android:background="@drawable/button_input_custom"
+        android:background="@drawable/button_input_custom_gray"
         android:text="내 책꽃이에 추가"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-        app:layout_constraintVertical_bias="0.542" />
+        app:layout_constraintVertical_bias="0.54" />
 
     <Button
         android:id="@+id/btn_pageinput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:background="@drawable/button_input_custom"
         android:text="@string/inputpage"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/btn_add_bookshelf"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_add_bookshelf"
-        app:layout_constraintHorizontal_bias="0.64"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btn_add_bookshelf"
         app:layout_constraintVertical_bias="0.0" />
