@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4284B3">
+
+    <ImageView
+        android:id="@+id/mainLogo"
+        android:layout_width="200dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/main_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mainLogo">
+
+        <EditText
+            android:id="@+id/editTextTextEmailAddress"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:hint="email"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:fontFamily="@font/nanumsquaretoundt"
+            android:inputType="textEmailAddress"
+            android:textSize="8pt" />
+
+        <EditText
+            android:id="@+id/editTextNumberPassword"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="password"
+            android:inputType="textEmailSubject"
+            android:password="true"
+            android:textSize="8pt" />
+
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button_login"
+            android:fontFamily="@font/nanumsquaretoundt"
+            android:text="로그인"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:srcCompat="@drawable/oneline_white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+        <TextView
+            android:id="@+id/text_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/nanumsquaretoundt"
+            android:text="회원가입" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/nanumsquaretoundt"
+            android:text="  |  " />
+
+        <TextView
+            android:id="@+id/text_findpassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:fontFamily="@font/nanumsquaretoundt"
+            android:text="비밀번호 찾기" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

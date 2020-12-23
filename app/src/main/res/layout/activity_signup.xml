@@ -1,58 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.js.firebaseauthentication.Signup">
+    android:background="#4284B3">
 
     <TextView
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:textSize="23dp"
-        android:textColor="@color/colorAccent"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nanumsquaretoundt"
         android:text="회원가입" />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
         android:text="이 앱은 회원가입을 해야 정상적으로 사용할 수 있습니다.\n Email로 등록해 주세요."
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:fontFamily="@font/nanumsquaretoundt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <EditText
-        android:id="@+id/editTextEmail"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_gravity="center_horizontal"
-        android:hint="Enter email"
-        android:inputType="textEmailAddress" />
+        android:layout_marginTop="40dp"
+        android:id="@+id/editTextTextEmailAddress"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:hint="email"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:fontFamily="@font/nanumsquaretoundt"
+        android:inputType="textEmailAddress"
+        android:textSize="8pt" />
 
     <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="250dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Enter password"
-        android:inputType="textPassword" />
+        android:id="@+id/editTextNumberPassword"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="password"
+        android:password="true"
+        android:inputType="textEmailSubject"
+        android:textSize="8pt" />
+
+    <EditText
+        android:id="@+id/editTextNumberPasswordRE"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:hint="password confirm"
+        android:password="true"
+        android:inputType="textEmailSubject"
+        android:textSize="8pt" />
 
     <Button
-        android:id="@+id/buttonSignup"
-        android:layout_width="200dp"
+        android:id="@+id/button_signup"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:layout_gravity="center_horizontal"
-        android:text="회원가입" />
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/button_login"
+        android:fontFamily="@font/nanumsquaretoundt"
+        android:text="회원가입"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/oneline_white" />
 
     <TextView
         android:text="회원이시면 여기에서 로그인 해주세요."
         android:id="@+id/textViewSignin"
         android:textAlignment="center"
-        android:layout_margin="15dp"
+        android:layout_margin="30dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nanumsquaretoundt"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

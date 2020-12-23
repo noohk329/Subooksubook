@@ -12,22 +12,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.subooksubook.MainActivity;
 import com.example.subooksubook.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class FindPassword extends AppCompatActivity implements View.OnClickListener{
-    private static final String TAG = "FindActivity";
+    private String TAG = "**********FindPassword***********";
 
     //define view objects
     private EditText editTextUserEmail;
     private Button buttonFind;
-    private TextView textviewMessage;
+    private TextView textviewMessage, textviewSignin;
     private ProgressDialog progressDialog;
     //define firebase object
     private FirebaseAuth firebaseAuth;
-
 
 
     @Override
@@ -36,12 +36,19 @@ public class FindPassword extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_find_password);
 
         editTextUserEmail = (EditText) findViewById(R.id.editTextUserEmail);
+        textviewSignin = (TextView) findViewById(R.id.textViewSignin);
         buttonFind = (Button) findViewById(R.id.buttonFind);
-        progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(FindPassword.this, R.style.ProgressDialogStyle);
         firebaseAuth = FirebaseAuth.getInstance();
 
         buttonFind.setOnClickListener(this);
-
+        textviewSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(FindPassword.this, MainLogin.class)); //추가해 줄 로그인 액티비티
+                finish();
+            }
+        });
     }
 
     @Override
@@ -58,7 +65,7 @@ public class FindPassword extends AppCompatActivity implements View.OnClickListe
                             if(task.isSuccessful()){
                                 Toast.makeText(FindPassword.this, "이메일을 보냈습니다.", Toast.LENGTH_LONG).show();
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), Login.class));
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             } else {
                                 Toast.makeText(FindPassword.this, "메일 보내기 실패!", Toast.LENGTH_LONG).show();
                             }

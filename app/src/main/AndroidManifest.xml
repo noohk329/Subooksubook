@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.subooksubook">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-feature android:name="android.hardware.camera" />
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -20,16 +18,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Login.MainLogin"></activity>
         <activity android:name=".Timepicker">
             <intent-filter>
                 <action android:name="com.example.subooksubook.activities.Timepicker" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name=".BookshelfF.ReadCard" />
-        <activity android:name=".Login.Profile" />
         <activity android:name=".Login.FindPassword" />
-        <activity android:name=".Login.Login" />
         <activity android:name=".Login.Signup" />
         <activity android:name=".BookshelfF.SearchNameSelected" />
         <activity android:name=".BookshelfF.SearchCode" />
@@ -37,25 +35,21 @@
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".DiaryListActivity" />
-        <activity android:name=".ShowDiaryDetailActivity"/>
 
-        <receiver android:name=".DeviceBootReceiver"
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".DiaryListActivity" />
+        <activity android:name=".ShowDiaryDetailActivity" />
+
+        <receiver
+            android:name=".DeviceBootReceiver"
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
         <receiver android:name=".AlarmReceiver" />
     </application>
 

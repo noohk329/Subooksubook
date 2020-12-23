@@ -54,7 +54,6 @@ public class CalendarViewWithNotesActivity extends Fragment {
         conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
     }
 
-
     public static Intent makeIntent(Context context) {
         return new Intent(context, CalendarViewWithNotesActivity.class);
     }
@@ -65,7 +64,7 @@ public class CalendarViewWithNotesActivity extends Fragment {
             Intent intent = getActivity().getIntent();
             iD_authen = intent.getStringExtra("id");
             Log.d("MyBookShelf", "id :" + this.iD_authen);
-            conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
+//            conditionRef = rootRefer.child(iD_authen).child("mybookshelf");
         }
 
         // Inflate the layout for this fragment

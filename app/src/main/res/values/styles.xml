@@ -82,4 +82,13 @@
         <item name="android:layout_marginEnd">18dp</item>
     </style>
 
+    <style name="ProgressDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="colorAccent">#4284B3</item>
+    </style>
+
+
+    출처: https://tlshenm.tistory.com/39 [No Job Of Star]
+
 </resources>
