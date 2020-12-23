@@ -82,6 +82,7 @@
         <item name="android:layout_marginEnd">18dp</item>
     </style>
 
+    <!-- 프로그래스바 다이얼로그 커스텀-->
     <style name="ProgressDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_centerHorizontal">true</item>

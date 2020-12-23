@@ -13,6 +13,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 
+import com.example.subooksubook.Login.MainLogin;
+
 
 public class SettingFragment extends PreferenceFragmentCompat {
     SharedPreferences pref;
@@ -97,7 +99,7 @@ public class SettingFragment extends PreferenceFragmentCompat {
     @SuppressLint("WrongConstant")
     public void setLogin(boolean set) {
         if(set == false) {
-            Intent intent = new Intent(getActivity().getApplicationContext(), Profile.class);
+            Intent intent = new Intent(getActivity().getApplicationContext(), MainLogin.class);
             intent.putExtra("id", iD_authen);
             startActivity(intent);
             getActivity().finish();
